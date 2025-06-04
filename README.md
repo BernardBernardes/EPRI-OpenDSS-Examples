@@ -5,7 +5,8 @@ This repository contains a copy of the example files provided with the official 
 ## Source of Files
 
 The files were copied directly from the examples directory of the standard OpenDSS installation.
-*OpenDSS Version 10.2.0.1 - Columbus
+
+OpenDSS Version 10.2.0.1 - Columbus
 
 ## Purpose
 
