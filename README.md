@@ -22,5 +22,6 @@ The main purpose of this repository is to provide a quick and convenient way to 
 
 You can clone this repository or download the files individually to use them as a reference or starting point for your own studies and simulations with OpenDSS.
 To use the files directly in environments like Google Colab, you can run the following commands to clone the repository:
+
 !git clone https://github.com/BernardBernardes/EPRI-OpenDSS-Examples.git
 
