@@ -1,0 +1,30 @@
+
+VARIABLES REPORT
+
+Present values of all variables in PC Elements in the circuit.
+
+ELEMENT: IndMach012.motor1
+No. of variables: 22
+  Frequency = 59.0404
+  Theta (deg) = -44.79
+  E1 = 0.897902
+  Pshaft = 1.19976E006
+  dSpeed (deg/sec) = -0.0252745
+  dTheta (deg) = -6.02963
+  Slip = 0.0159941
+  puRs = 0.048
+  puXs = 0.075
+  puRr = 0.018
+  puXr = 0.12
+  puXm = 3.8
+  Maxslip = 0.1
+  Is1 = 1593.74
+  Is2 = 21.4661
+  Ir1 = 1531.94
+  Ir2 = 21.4675
+  Stator Losses = 56191
+  Rotor Losses = 19469.4
+  Shaft Power (hp) = 1605.34
+  Power Factor = 0.908392
+  Efficiency (%) = 93.6936
+

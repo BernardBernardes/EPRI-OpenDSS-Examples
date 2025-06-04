@@ -1,0 +1,41 @@
+Clear
+set defaultBaseFrequency=60
+
+New Circuit.ieee123
+
+
+Redirect Vsource.dss
+Redirect LineCode.DSS
+Redirect LoadShape.DSS
+Redirect GrowthShape.DSS
+Redirect TCC_Curve.DSS
+Redirect Spectrum.DSS
+Redirect feeder\Branches.dss
+Redirect feeder\Transformers.dss
+Redirect feeder\Loads.dss
+Redirect feeder\Capacitors.dss
+Redirect Line.DSS
+Redirect Transformer.DSS
+Redirect RegControl.DSS
+Redirect EnergyMeter.DSS
+MakeBusList
+Redirect BusVoltageBases.dss  ! set voltage bases
+Buscoords buscoords.dss
+
+! Here we tell DSS where our local Python is installed
+set pyPath=C:\ProgramData\anaconda3 !debug=yes
+
+! Here we create our pyController
+New pyControl.myControl pyScript=Regulator_Sgl_Phase.py
+
+set maxcontroliter=500
+
+set TotalTime=0
+solve
+Get TotalTime
+
+
+
+
+
+

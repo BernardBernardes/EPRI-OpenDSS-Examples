@@ -1,0 +1,56 @@
+
+CIRCUIT ELEMENT POWER FLOW
+
+(Power Flow into element from indicated Bus)
+
+Power Delivery Elements
+
+  Bus Phase     kW     +j   kvar         kVA         PF
+
+ELEMENT = "Vsource.SOURCE"
+A        1       327.5 +j   -187.5      377.4      -0.8678
+A        2       329.0 +j   -187.1      378.5      -0.8693
+A        3       329.0 +j   -188.5      379.2      -0.8676
+   TERMINAL TOTAL   985.5 +j   -563.2     1135.0      -0.8682
+A        0         0.0 +j      0.0        0.0       1.0000
+A        0         0.0 +j      0.0        0.0       1.0000
+A        0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL     0.0 +j      0.0        0.0       1.0000
+
+ELEMENT = "Line.LINEAB"
+A        1      -327.5 +j    187.5      377.4      -0.8678
+A        2      -329.0 +j    187.1      378.5      -0.8693
+A        3      -329.0 +j    188.5      379.2      -0.8676
+   TERMINAL TOTAL  -985.5 +j    563.2     1135.0      -0.8682
+B        1       332.6 +j   -182.0      379.2      -0.8772
+B        2       332.6 +j   -182.0      379.2      -0.8772
+B        3       332.6 +j   -182.0      379.2      -0.8772
+   TERMINAL TOTAL   997.9 +j   -546.1     1137.6      -0.8772
+
+ELEMENT = "Transformer.TR"
+B        1      -332.6 +j    182.0      379.2      -0.8772
+B        2      -332.6 +j    182.0      379.2      -0.8772
+B        3      -332.6 +j    182.0      379.2      -0.8772
+B        0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL  -997.9 +j    546.1     1137.6      -0.8772
+C        1       333.3 +j   -182.0      379.8      -0.8776
+C        2       333.3 +j   -182.0      379.8      -0.8776
+C        3       333.3 +j   -182.0      379.8      -0.8776
+C        0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL  1000.0 +j   -546.1     1139.4      -0.8776
+
+= = = = = = = = = = = = = = = = = = =  = = = = = = = = = = =  = =
+
+Power Conversion Elements
+
+  Bus Phase     kW   +j  kvar         kVA         PF
+
+ELEMENT = "PVSystem.PV"
+C        1    -333.3 +j  182.0      379.8      -0.8776
+C        2    -333.3 +j  182.0      379.8      -0.8776
+C        3    -333.3 +j  182.0      379.8      -0.8776
+C        0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  -1000.0 +j    546.1     1139.4      -0.8776
+
+
+Total Circuit Losses =   14.5 +j   17.0

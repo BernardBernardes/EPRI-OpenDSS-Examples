@@ -1,0 +1,73 @@
+! Annotated "Run" file for the IEEE 123 Bus Test Case
+! Example for illustrating the use of PyControl for dynamic simulation purposes
+
+Compile (IEEE123Master.dss)
+
+RegControl.creg1a.maxtapchange=1  Delay=15  !Allow only one tap change per solution. This one moves first
+RegControl.creg2a.maxtapchange=1  Delay=30  !Allow only one tap change per solution
+RegControl.creg3a.maxtapchange=1  Delay=30  !Allow only one tap change per solution
+RegControl.creg4a.maxtapchange=1  Delay=30  !Allow only one tap change per solution
+RegControl.creg3c.maxtapchange=1  Delay=30  !Allow only one tap change per solution
+RegControl.creg4b.maxtapchange=1  Delay=30  !Allow only one tap change per solution
+RegControl.creg4c.maxtapchange=1  Delay=30  !Allow only one tap change per solution
+
+! The default maximum control iterations is 10. With so many regulators each moving only one tap at a time,
+! this is insufficient for the 123-bus test case, which will need 15 control iterations for the initial solution.
+! Therefore, the 'MaxControlIter' option is set to 30 to be safe.
+
+Set MaxControlIter=30
+
+! Solve executes the solution for the present solution mode, which is "snapshot".
+
+New EnergyMeter.Feeder Line.L115 1
+
+! This case considers the default load shape to represent the load demand in time for daily simulations
+! Adding DER for supporting the microgrid below switch 5
+new Transformer.TPV1 phases=3 windings=2 buses=(PVBus 108) conns=(wye wye) kvs=(0.48 4.16) kvas=(1000 1000) taps='1 1' XHL=0.5
+
+New "PVSystem.myPV" phases=3 conn=delta bus1=PVBus kV=0.48 kva=800 pmpp=800 %R=50 %X=50 kP=0.01 KVDC=0.700 PITol=0.1 SafeVoltage=0
+
+! Monitors
+
+New "Monitor.pvmonitor" element=pvsystem.mypv mode=1 terminal=1 PPolar=no residual=no VIPolar=yes
+New "Monitor.pvvi" element=pvsystem.mypv mode=0 terminal=1
+
+calcv
+solve
+Buscoords BusCoords.dat   ! load in bus coordinates
+
+
+! Here we tell DSS where our local Python is installed
+set pyPath=C:\ProgramData\anaconda3 !debug=yes
+
+! Here we create our pyController
+New pyControl.myPVSys pyScript=DynamicIBR.py
+
+
+! Simulation starts at 10 hours, then there is a fault in the system
+! Starts in dynamics mode and goes for 200 ms
+set mode=dynamics steptime=0.001 maxiterations=500 number=200
+set loadshapeclass=daily
+set time=(0,0)
+solve
+
+! Then the fault happens at bus 57 (1.6 mi from the storage, 2.21 mi from the PV)
+New Fault.myFault phases=3 bus1=51
+
+! Enables the storage device (fully charged) and simulate the behavior during the fault
+set number=70
+solve
+! The fault is cleared
+Fault.myFault.enabled=False
+! Goes for another 200 ms to bring the system back
+set number=200
+solve
+
+! Export monitors
+export monitors all
+
+
+
+
+
+

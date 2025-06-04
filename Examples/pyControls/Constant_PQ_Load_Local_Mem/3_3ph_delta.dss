@@ -1,0 +1,24 @@
+
+
+ClearAll
+
+set DefaultBaseFrequency=60
+
+New Circuit.Thevenin bus1=SourceBus pu=1.0 basekv=13.8 model=ideal
+
+New Line.mySW phases=3 bus1=SourceBus bus2=LdBus Switch=Yes
+
+New Load.s48 phases=3 bus1=LdBus kv=13.8 kW=105 kvar=75 conn=wye
+
+Set voltagebases=[13.8]
+Calcvoltagebases
+
+! Here we tell DSS where our local Python is installed
+set pyPath=C:\ProgramData\anaconda3 !debug=yes
+
+! Here we create our pyController
+New pyControl.myControl pyScript=Constant_PQ_Load_V2.py
+
+
+Solve
+
